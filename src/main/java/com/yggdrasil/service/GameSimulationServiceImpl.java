@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -33,8 +32,7 @@ public class GameSimulationServiceImpl implements GameSimulationService {
             return result.divide(BigDecimal.valueOf(threads));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            return null;
         }
-
-        return null;
     }
 }
