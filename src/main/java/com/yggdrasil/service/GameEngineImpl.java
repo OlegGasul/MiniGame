@@ -51,7 +51,7 @@ public class GameEngineImpl implements GameEngine {
 
             if (additionalCardsIterator.hasNext()) {
                 Card card = additionalCardsIterator.next();
-                secondChance = card.equals(Card.SECOND_CHANCE);
+                secondChance = card == Card.SECOND_CHANCE;
                 sum += card.getAward();
             }
         } while (secondChance);
