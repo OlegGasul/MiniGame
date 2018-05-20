@@ -21,6 +21,13 @@ public class GameSimulationServiceImpl implements GameSimulationService {
     private GameSimulationRepeaterFactory gameSimulationRepeaterFactory;
 
     public BigDecimal calculateAverageAward(long simulations, int threads) {
+        if (simulations <= 0) {
+            throw new IllegalArgumentException("Simulations should be 1 or greater");
+        }
+        if (threads <= 0) {
+            throw new IllegalArgumentException("Number of threads should be 1 or greater");
+        }
+
         long repeats = simulations / threads;
 
         Supplier<List<CompletableFuture<BigDecimal>>> supplier = () -> new LinkedList<>();

@@ -1,7 +1,6 @@
 package com.yggdrasil.service;
 
 import com.yggdrasil.entity.Card;
-
 import java.util.Collection;
 
 public interface GameEngine {
