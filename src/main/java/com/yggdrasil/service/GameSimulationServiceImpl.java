@@ -15,7 +15,7 @@ public class GameSimulationServiceImpl implements GameSimulationService {
     private GameSimulationRepeaterFactory gameSimulationRepeaterFactory;
 
     public BigDecimal calculateAverageAward(long attempts, int threads) {
-        CompletableFuture<Double>[] futures = new CompletableFuture[threads];
+        CompletableFuture<BigDecimal>[] futures = new CompletableFuture[threads];
         long repeats = attempts / threads;
         IntStream.range(0, threads).forEach(i -> {
             GameSimulationRepeater supplier = gameSimulationRepeaterFactory.createSupplier(repeats);
@@ -26,8 +26,8 @@ public class GameSimulationServiceImpl implements GameSimulationService {
             CompletableFuture.allOf(futures).join();
 
             BigDecimal result = BigDecimal.ZERO;
-            for (CompletableFuture<Double> future : futures) {
-                result = result.add(BigDecimal.valueOf(future.get()));
+            for (CompletableFuture<BigDecimal> future : futures) {
+                result = result.add(future.get());
             }
 
             return result.divide(BigDecimal.valueOf(threads));
