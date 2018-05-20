@@ -24,7 +24,6 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        String argAttempt = strings[0];
         long attempts = 10_000_000L;
         int threads = 1;
 
