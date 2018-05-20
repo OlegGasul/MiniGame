@@ -26,7 +26,8 @@ public class GameSimulationServiceImpl implements GameSimulationService {
         Supplier<List<CompletableFuture<BigDecimal>>> supplier = () -> new LinkedList<>();
         CompletableFuture<BigDecimal>[] futures = Stream.generate(() -> CompletableFuture.supplyAsync(gameSimulationRepeaterFactory.createSupplier(repeats)))
                 .limit(threads)
-                .collect(Collectors.toCollection(supplier)).toArray(new CompletableFuture[threads]);
+                .collect(Collectors.toCollection(supplier))
+                .toArray(new CompletableFuture[threads]);
 
         try {
             CompletableFuture.allOf(futures).join();
