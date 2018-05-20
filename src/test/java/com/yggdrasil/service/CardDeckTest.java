@@ -39,9 +39,7 @@ public class CardDeckTest {
 
     @Test
     void shuffleCardsTest() {
-        Collection<Card> cards1 = cardDeckFactory.generateCards();
-        Collection<Card> cards2 = cardDeckFactory.generateCards();
-
-        assertNotEquals(cards1, cards2);
+        assertNotEquals(cardDeckFactory.generateCards(), cardDeckFactory.generateCards());
+        assertNotEquals(cardDeckFactory.generateAdditionalCards(), cardDeckFactory.generateAdditionalCards());
     }
 }
