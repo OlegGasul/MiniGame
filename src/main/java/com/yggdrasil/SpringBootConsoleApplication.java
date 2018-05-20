@@ -23,9 +23,14 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... strings) {
-        long attempts = 10_000_000L;
-        int threads = 1;
+    public void run(String... args) {
+        if (args.length < 2) {
+            log.info("[Usage]: mvn spring-boot:run -Drun.arguments=\"<number of repeats>,<number of threads>\"");
+            System.exit(0);
+        }
+
+        long attempts = Long.parseLong(args[0]);
+        int threads = Integer.parseInt(args[1]);
 
         BigDecimal result = gameSimulationService.calculateAverageAward(attempts, threads);
         log.info("Average value of " + attempts + " attempts = " + result.doubleValue());
