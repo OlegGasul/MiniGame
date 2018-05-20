@@ -3,12 +3,12 @@ package com.yggdrasil.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.OptionalDouble;
+import java.math.BigDecimal;
 import java.util.function.Supplier;
-import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 @Component
-public class GameSimulationRepeater implements Supplier<Double> {
+public class GameSimulationRepeater implements Supplier<BigDecimal> {
     @Autowired
     private CardDeckFactory cardDeckFactory;
 
@@ -18,11 +18,12 @@ public class GameSimulationRepeater implements Supplier<Double> {
     private long repeats;
 
     @Override
-    public Double get() {
-        OptionalDouble optionalDouble = LongStream.range(1, repeats)
-                .map(i -> gameEngine.calculateAward(cardDeckFactory.generateCards(), cardDeckFactory.generateAdditionalCards()) )
-                .average();
-        return optionalDouble.isPresent() ? optionalDouble.getAsDouble() : null;
+    public BigDecimal get() {
+        return Stream.generate(() -> gameEngine.calculateAward(cardDeckFactory.generateCards(), cardDeckFactory.generateAdditionalCards()))
+            .limit(repeats)
+            .map(BigDecimal::valueOf)
+            .reduce(BigDecimal.ZERO, BigDecimal::add)
+            .divide(BigDecimal.valueOf(repeats));
     }
 
     public void setRepeats(long repeats) {
