@@ -12,13 +12,13 @@ import java.util.stream.IntStream;
 public class GameSimulationServiceImpl implements GameSimulationService {
 
     @Autowired
-    private GameSimulationSupplierFactory gameSimulationSupplierFactory;
+    private GameSimulationRepeaterFactory gameSimulationRepeaterFactory;
 
     public BigDecimal calculateAverageAward(long attempts, int threads) {
         CompletableFuture<Double>[] futures = new CompletableFuture[threads];
         long repeats = attempts / threads;
         IntStream.range(0, threads).forEach(i -> {
-            GameSimulationRepeater supplier = gameSimulationSupplierFactory.createSupplier(repeats);
+            GameSimulationRepeater supplier = gameSimulationRepeaterFactory.createSupplier(repeats);
             futures[i] = CompletableFuture.supplyAsync(supplier);
         });
 

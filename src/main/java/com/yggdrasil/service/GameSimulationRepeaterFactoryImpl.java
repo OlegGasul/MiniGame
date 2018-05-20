@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GameSimulationSupplierFactoryImpl implements GameSimulationSupplierFactory {
+public class GameSimulationRepeaterFactoryImpl implements GameSimulationRepeaterFactory {
     @Autowired
     private BeanFactory beanFactory;
 

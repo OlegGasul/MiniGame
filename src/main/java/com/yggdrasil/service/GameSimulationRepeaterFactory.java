@@ -1,5 +1,5 @@
 package com.yggdrasil.service;
 
-public interface GameSimulationSupplierFactory {
+public interface GameSimulationRepeaterFactory {
     GameSimulationRepeater createSupplier(long repeats);
 }
