@@ -16,8 +16,9 @@ public class GameSimulationServiceImpl implements GameSimulationService {
 
     public BigDecimal calculateAverageAward(long attempts, int threads) {
         CompletableFuture<Double>[] futures = new CompletableFuture[threads];
+        long repeats = attempts / threads;
         IntStream.range(0, threads).forEach(i -> {
-            GameSimulationRepeater supplier = gameSimulationSupplierFactory.createSupplier(attempts / threads);
+            GameSimulationRepeater supplier = gameSimulationSupplierFactory.createSupplier(repeats);
             futures[i] = CompletableFuture.supplyAsync(supplier);
         });
 
