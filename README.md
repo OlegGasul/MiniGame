@@ -10,7 +10,7 @@ MiniGame simulator.
 
 
 ## Running
-In the wroking directory run
+In the working directory run
 
 ```$ mvn clean install```
 
