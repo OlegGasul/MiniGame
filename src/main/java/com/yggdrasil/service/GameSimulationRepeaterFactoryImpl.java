@@ -10,7 +10,7 @@ public class GameSimulationRepeaterFactoryImpl implements GameSimulationRepeater
     private BeanFactory beanFactory;
 
     @Override
-    public GameSimulationRepeater createSupplier(long repeats) {
+    public GameSimulationRepeater createRepeater(long repeats) {
         GameSimulationRepeater repeater = beanFactory.getBean(GameSimulationRepeater.class);
         repeater.setRepeats(repeats);
 
