@@ -25,14 +25,20 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (args.length < 2) {
-            log.info("[Usage]: mvn spring-boot:run -Drun.arguments=\"<number of repeats>,<number of threads>\"");
+            log.info("[Usage]: mvn spring-boot:run -Drun.arguments=\"<number of simulations>,<number of threads>\"");
             System.exit(0);
         }
 
-        long attempts = Long.parseLong(args[0]);
-        int threads = Integer.parseInt(args[1]);
+        try {
+            long simulations = Long.parseLong(args[0]);
+            int threads = Integer.parseInt(args[1]);
 
-        BigDecimal result = gameSimulationService.calculateAverageAward(attempts, threads);
-        log.info("Average value of " + attempts + " attempts = " + result.doubleValue());
+            BigDecimal result = gameSimulationService.calculateAverageAward(simulations, threads);
+            log.info("Average value of " + simulations + " simulations = " + result.doubleValue());
+        } catch (NumberFormatException ex) {
+            log.error("Error parsing parameters", ex);
+        } catch (Exception ex) {
+            log.error("Runtime error", ex);
+        }
     }
 }

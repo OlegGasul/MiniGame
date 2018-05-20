@@ -13,8 +13,8 @@ MiniGame simulator.
 In the wroking directory run
 
 ```$ mvn clean install```
-
-```$ mvn spring-boot:run -Drun.arguments="10000000,2"```
+mvn spring-boot:run -Drun.arguments="10000000,2"
+```$ ```
 
 Where:
 

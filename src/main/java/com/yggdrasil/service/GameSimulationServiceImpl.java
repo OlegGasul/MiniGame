@@ -20,8 +20,8 @@ public class GameSimulationServiceImpl implements GameSimulationService {
     @Autowired
     private GameSimulationRepeaterFactory gameSimulationRepeaterFactory;
 
-    public BigDecimal calculateAverageAward(long attempts, int threads) {
-        long repeats = attempts / threads;
+    public BigDecimal calculateAverageAward(long simulations, int threads) {
+        long repeats = simulations / threads;
 
         Supplier<List<CompletableFuture<BigDecimal>>> supplier = () -> new LinkedList<>();
         CompletableFuture<BigDecimal>[] futures = Stream.generate(() -> CompletableFuture.supplyAsync(gameSimulationRepeaterFactory.createSupplier(repeats)))
@@ -37,7 +37,7 @@ public class GameSimulationServiceImpl implements GameSimulationService {
                 .divide(BigDecimal.valueOf(threads));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return null;
+            throw e;
         }
     }
 }
