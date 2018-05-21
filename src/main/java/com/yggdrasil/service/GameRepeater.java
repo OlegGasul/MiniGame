@@ -18,7 +18,6 @@ public class GameRepeater implements Supplier<BigDecimal> {
     public BigDecimal get() {
         return Stream.generate(() -> gameEngine.calculateAward(cardDeckFactory.generateCards(), cardDeckFactory.generateAdditionalCards()))
             .limit(repeats)
-            .parallel()
             .map(BigDecimal::valueOf)
             .reduce(BigDecimal.ZERO, BigDecimal::add)
             .divide(BigDecimal.valueOf(repeats));
