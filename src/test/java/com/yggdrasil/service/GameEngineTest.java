@@ -4,11 +4,10 @@ import com.yggdrasil.entity.Card;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static java.util.Collections.*;
 
 public class GameEngineTest {
     private GameEngine gameEngine = new GameEngineImpl();
@@ -26,7 +25,7 @@ public class GameEngineTest {
         additionalCards = Arrays.asList(Card.SECOND_CHANCE, Card.EUR_10);
         assertEquals(145L, gameEngine.calculateAward(cards, additionalCards));
 
-        assertEquals(0L, gameEngine.calculateAward(Collections.EMPTY_LIST, Collections.EMPTY_LIST));
+        assertEquals(0L, gameEngine.calculateAward(EMPTY_LIST, EMPTY_LIST));
     }
 
     @Test
