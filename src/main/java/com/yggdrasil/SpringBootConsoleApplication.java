@@ -26,7 +26,7 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
     public void run(String... args) {
         if (args.length < 2) {
             log.info("[Usage]: mvn spring-boot:run -Drun.arguments=\"<number of simulations>,<number of threads>\"");
-            System.exit(0);
+            return;
         }
 
         try {
