@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GameSimulationRepeaterFactoryImpl implements GameSimulationRepeaterFactory {
+public class GameRepeaterFactoryImpl implements GameRepeaterFactory {
     @Autowired
     private BeanFactory beanFactory;
 
     @Override
-    public GameSimulationRepeater createRepeater(long repeats) {
-        GameSimulationRepeater repeater = beanFactory.getBean(GameSimulationRepeater.class);
+    public GameRepeater createRepeater(long repeats) {
+        GameRepeater repeater = beanFactory.getBean(GameRepeater.class);
         repeater.setRepeats(repeats);
 
         return repeater;

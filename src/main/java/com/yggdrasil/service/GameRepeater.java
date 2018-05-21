@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @Component
-public class GameSimulationRepeater implements Supplier<BigDecimal> {
+public class GameRepeater implements Supplier<BigDecimal> {
     @Autowired
     private CardDeckFactory cardDeckFactory;
 

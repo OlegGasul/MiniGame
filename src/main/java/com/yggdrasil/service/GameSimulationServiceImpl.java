@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class GameSimulationServiceImpl implements GameSimulationService {
 
     @Autowired
-    private GameSimulationRepeaterFactory gameSimulationRepeaterFactory;
+    private GameRepeaterFactory gameRepeaterFactory;
 
     public BigDecimal calculateAverageAward(long simulations, int threads) {
         if (simulations <= 0) {
@@ -31,7 +31,7 @@ public class GameSimulationServiceImpl implements GameSimulationService {
         long repeats = simulations / threads;
 
         Supplier<List<CompletableFuture<BigDecimal>>> supplier = () -> new LinkedList<>();
-        CompletableFuture<BigDecimal>[] futures = Stream.generate(() -> CompletableFuture.supplyAsync(gameSimulationRepeaterFactory.createRepeater(repeats)))
+        CompletableFuture<BigDecimal>[] futures = Stream.generate(() -> CompletableFuture.supplyAsync(gameRepeaterFactory.createRepeater(repeats)))
                 .limit(threads)
                 .collect(Collectors.toCollection(supplier))
                 .toArray(new CompletableFuture[threads]);
