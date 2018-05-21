@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.math.BigDecimal;
 
 @Slf4j
-@ComponentScan("com.yggdrasil.service")
+@ComponentScan({"com.yggdrasil.config", "com.yggdrasil.service"})
 public class SpringBootConsoleApplication implements CommandLineRunner {
     @Autowired
     private GameSimulationService gameSimulationService;

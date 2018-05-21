@@ -1,13 +1,10 @@
 package com.yggdrasil.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-@Component
 public class GameRepeater implements Supplier<BigDecimal> {
     @Autowired
     private CardDeckFactory cardDeckFactory;
