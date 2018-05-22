@@ -4,6 +4,7 @@ import com.yggdrasil.entity.Card;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.yggdrasil.entity.Card.*;
@@ -24,12 +25,13 @@ public class CardDeckFactoryImpl implements CardDeckFactory {
 
     private Collection<Card> shuffle(Collection<Card> cards) {
         Card[] arr = cards.toArray(new Card[cards.size()]);
+        Random random = ThreadLocalRandom.current();
         for (int i = arr.length - 1; i >= 1; i--) {
-            int j = ThreadLocalRandom.current().nextInt(0, i);
+            int j = random.nextInt(i);
 
-            Card klop = arr[j];
+            Card swap = arr[j];
             arr[j] = arr[i];
-            arr[i] = klop;
+            arr[i] = swap;
         }
 
         return Arrays.asList(arr);
